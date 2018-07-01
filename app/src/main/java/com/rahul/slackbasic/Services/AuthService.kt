@@ -2,40 +2,54 @@ package com.rahul.slackbasic.Services
 
 import android.content.Context
 import android.util.Log
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
-import com.rahul.slackbasic.Utilities.URL_REGISTER
-import org.json.JSONObject
+import com.rahul.slackbasic.Utilities.*
+import com.rahul.slackbasic.Utilities.MyPreferences.get
+import com.rahul.slackbasic.Utilities.MyPreferences.set
+
 
 object AuthService {
 
-    fun registerUser(context: Context, email: String, password: String, complete: (Boolean) -> Unit){
-
-        val jsonBody = JSONObject()
-        jsonBody.put("email", email)
-        jsonBody.put("password", password)
-        val requestBody = jsonBody.toString()
+    var isLoggedIn = true
+    var userEmail = ""
+    var authToken = ""
 
 
+    fun setPreferences(context: Context, username: String, email: String, avatarName: String, avatarColor: String, id: String, token: String){
+        val prefs = MyPreferences.customPrefs(context, Constants.MY_SHARED_PREFERENCE)
+        prefs[Constants.KEY_TOKEN] = token
+        prefs[Constants.KEY_NAME] = username
+        prefs[Constants.KEY_EMAIL] = email
+        prefs[Constants.KEY_AVATAR_NAME] = avatarName
+        prefs[Constants.KEY_AVATAR_BG] = avatarColor
+        prefs[Constants.KEY_ID] = id
+        isLoggedIn = true
+        setUserData(context)
 
-        val registerRequest = object : StringRequest(Method.POST, URL_REGISTER, Response.Listener { response ->
-            println(response)
-            complete(true)
-        }, Response.ErrorListener { error ->
-            Log.d("Error", "Could not register user : $error")
-            complete(false)
-        }) {
-            override fun getBodyContentType(): String {
-                return "application/json; charset=utf-8"
-            }
-
-            override fun getBody(): ByteArray {
-                return requestBody.toByteArray()
-            }
-        }
-
-        Volley.newRequestQueue(context).add(registerRequest)
 
     }
+
+    fun setUserData(context: Context){
+        val prefs = MyPreferences.customPrefs(context, Constants.MY_SHARED_PREFERENCE)
+        UserDataService.name = prefs[Constants.KEY_NAME, Constants.NAME_DEFAULT]
+        UserDataService.email = prefs[Constants.KEY_EMAIL, Constants.EMAIL_DEFAULT]
+        UserDataService.avatarName = prefs[Constants.KEY_AVATAR_NAME, Constants.AVATAR_NAME_DEFAULT]
+        UserDataService.avatarColor = prefs[Constants.KEY_AVATAR_BG, Constants.AVATAR_BG_DEFAULT]
+        UserDataService.id = prefs[Constants.KEY_ID, Constants.ID_DEFAULT]
+        UserDataService.token = prefs[Constants.KEY_TOKEN, Constants.TOKEN_DEFAULT]
+        Log.v("${UserDataService.token}", "${UserDataService.avatarColor}")
+        isLoggedIn = UserDataService.token != Constants.TOKEN_DEFAULT
+    }
+
+    fun Logout(context: Context){
+        val prefs = MyPreferences.customPrefs(context, Constants.MY_SHARED_PREFERENCE)
+        prefs[Constants.KEY_TOKEN] = Constants.TOKEN_DEFAULT
+        prefs[Constants.KEY_NAME] = Constants.NAME_DEFAULT
+        prefs[Constants.KEY_EMAIL] = Constants.EMAIL_DEFAULT
+        prefs[Constants.KEY_AVATAR_NAME] = Constants.AVATAR_NAME_DEFAULT
+        prefs[Constants.KEY_AVATAR_BG] = Constants.AVATAR_BG_DEFAULT
+        prefs[Constants.KEY_ID] = Constants.ID_DEFAULT
+        setUserData(context)
+        isLoggedIn = false
+    }
+
 }

@@ -11,37 +11,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/generateColorBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:background="@color/colorPrimary"
             android:onClick="generateColorClicked"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:text="Generate Background Color"
-            android:textColor="@android:color/white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Change Background Color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/createAvatarImageView" />
 
-        <EditText
+
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/createUsernameText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
-            android:ems="10"
-            android:hint="username"
-            android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:ems="10"
+            app:layout_constraintTop_toTopOf="parent">
+            <android.support.design.widget.TextInputEditText android:id="@+id/inputUsernameSignup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Username" />
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
+
+
+        <!--  Email Label -->
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/createEmailText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -49,14 +55,20 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:hint="e-mail"
-            android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/createUsernameText" />
+            app:layout_constraintTop_toBottomOf="@+id/createUsernameText" >
+            <EditText android:id="@+id/inputEmailSignup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="Email" />
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
+
+        <!-- Password Label -->
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/createPasswordText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -64,12 +76,16 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:hint="password"
-            android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/createEmailText" />
+            app:layout_constraintTop_toBottomOf="@+id/createEmailText">
+            <EditText android:id="@+id/inputPasswordSignup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="Password"/>
+        </android.support.design.widget.TextInputLayout>
 
         <TextView
             android:id="@+id/textView2"
@@ -94,24 +110,34 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2"
             app:srcCompat="@drawable/profiledefault" />
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/createUserBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="32dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:background="@color/colorPrimaryDark"
+            android:layout_marginTop="8dp"
             android:onClick="createUserClicked"
             android:text="Create User"
-            android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/generateColorBtn"
+            app:layout_constraintTop_toBottomOf="@+id/tvLinkLogin"
             app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/tvLinkLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:text="Already have an account? Click here to login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/generateColorBtn" />
     </android.support.constraint.ConstraintLayout>
 
 </ScrollView>
