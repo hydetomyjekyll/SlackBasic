@@ -53,10 +53,13 @@
             android:id="@+id/btnLogin"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
+
             android:padding="12dp"
-            android:text="Login"/>
+            android:text="Login"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@android:color/white" />
 
         <TextView android:id="@+id/tvLinkSignup"
             android:layout_width="fill_parent"

@@ -49,6 +49,8 @@ object AuthService {
         prefs[Constants.KEY_AVATAR_BG] = Constants.AVATAR_BG_DEFAULT
         prefs[Constants.KEY_ID] = Constants.ID_DEFAULT
         setUserData(context)
+        MessageService.clearMessages()
+        MessageService.clearChannels()
         isLoggedIn = false
     }
 

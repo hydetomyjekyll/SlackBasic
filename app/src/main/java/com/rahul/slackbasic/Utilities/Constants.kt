@@ -9,6 +9,7 @@ object Constants{
     const val URL_CREAT_USER = "${BASE_URL}user/add"
     const val URL_GET_USER = "${BASE_URL}user/byEmail/"
     const val URL_GET_CHANNELS = "${BASE_URL}channel/"
+    const val URL_GET_MESSAGES = "${BASE_URL}message/byChannel/"
 
 
     const val KEY_TOKEN = "token"

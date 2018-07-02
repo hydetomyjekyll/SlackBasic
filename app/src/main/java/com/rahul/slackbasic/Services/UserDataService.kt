@@ -11,7 +11,7 @@ object UserDataService {
     var name = ""
     var token = "0"
 
-    fun returnAvatarColor(components: String): Int {
+    fun returnAvatarColor(components: String, a: Int): Int {
         val strippedColor = components
                 .replace("[","")
                 .replace("]","")
@@ -27,6 +27,6 @@ object UserDataService {
             b = (scanner.nextDouble()*255).toInt()
         }
 
-        return Color.rgb(r,g,b)
+        return Color.argb(a,r,g,b)
     }
 }
