@@ -1,12 +1,15 @@
 package com.rahul.slackbasic.Controller
 
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.LocalBroadcastManager
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethod
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
@@ -42,7 +45,11 @@ class LoginActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out)
         }
 
+
+
     }
+
+
 
     private fun login() {
         val email = inputEmailLogin.text.toString()
@@ -59,6 +66,8 @@ class LoginActivity : AppCompatActivity() {
         progressDialog.isIndeterminate = true
         progressDialog.setMessage("Authenticating..")
         progressDialog.show()
+
+        hideKeyboard()
 
         val prefs = MyPreferences.customPrefs(this, Constants.MY_SHARED_PREFERENCE)
 
@@ -192,5 +201,13 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
 
         btnLogin.isEnabled = true
+    }
+
+    fun hideKeyboard(){
+        val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+        if(inputManager.isAcceptingText){
+            inputManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+        }
     }
 }
